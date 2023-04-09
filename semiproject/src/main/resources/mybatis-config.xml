@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <environments default="production">
+        <environment id="development">
+          <transactionManager type="JDBC" />
+
+          <dataSource type="UNPOOLED">
+            <!-- <property name="driver" value="oracle.jdbc.OracleDriver"/>
+            <property name="url" value="jdbc:oracle:thin:@iabobij3bs5jnh34_high?TNS_ADMIN=C:/opt/OracleCloudWallet/VFX"/> -->
+
+            <property name="driver" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+            <property name="url" value="jdbc:log4jdbc:oracle:thin:@iabobij3bs5jnh34_high?TNS_ADMIN=/opt/OracleCloudWallet/VFX/"/>
+            
+            <property name="username" value="SCOTT"/>
+            <property name="password" value="Oracle12345678"/>
+
+            <property name="defaultNetworkTimeout" value="2000" />
+            <property name="driver.encoding" value="UTF8" />
+          </dataSource>
+        </environment>
+
+        <environment id="production">
+            <transactionManager type="JDBC" />
+
+            <dataSource type="POOLED">
+                <!-- <property name="driver" value="oracle.jdbc.OracleDriver"/>
+                <property name="url" value="jdbc:oracle:thin:@iabobij3bs5jnh34_high?TNS_ADMIN=C:/opt/OracleCloudWallet/VFX"/> -->
+
+                <property name="driver" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+                <property name="url" value="jdbc:log4jdbc:oracle:thin:@iabobij3bs5jnh34_high?TNS_ADMIN=/opt/OracleCloudWallet/VFX/"/>
+                
+                <property name="username" value="SCOTT"/>
+                <property name="password" value="Oracle12345678"/>
+
+                <property name="poolMaximumActiveConnections" value="10" />
+                <property name="poolMaximumIdleConnections" value="3" />
+                <property name="poolTimeToWait" value="20000" />
+                <property name="poolPingQuery" value="SELECT 1 FROM dual" />
+                <property name="poolPingEnabled" value="true" />
+                <property name="poolPingConnectionsNotUsedFor" value="60000" />
+        
+                <property name="driver.encoding" value="utf8" />
+            </dataSource>
+          </environment>
+    </environments>
+
+    <mappers>
+      <!-- 마이바티스는 동일한 namespace를 가진 Mapper Interface와 XML Mapper 파일이
+      동시에 등록된 경우에는, Mapper Interface를 우선적으로 선택한다. -->
+
+      <!-- 1. Mapper 인터페이스 등록 속성 -->
+      <mapper class="org.zerock.myapp.semiproject.mapper.BoardMapper"/>
+      <!-- <package name="org.zerock.myapp.mapper"/> -->
+
+      <!-- 2. Mapper XML 파일 등록 -->
+      <mapper resource="mappers/BoardMapper.xml"/>
+      <!-- <mapper resource="mappers/*Mapper.xml"/> -->
+      <!-- <mapper resource="mappers"/> -->
+      <!-- <mapper url=""/> -->
+      
+    </mappers>
+</configuration>
